@@ -63,8 +63,11 @@ ALTER TABLE TAREFAS ADD CONSTRAINT validaCPF CHECK (LENGTH(func_resp_cpf) = 11);
 --não foi inserido pois o length foi maior do cpf
 
 --b)
-ALTER TABLE TAREFAS ADD CONSTRAINT vldStatus CHECK (status = 'P' OR status = 'E' OR status = 'C');
--- erro
+--ALTER TABLE TAREFAS ADD CONSTRAINT vldStatus CHECK (status = 'P' OR status = 'E' OR status = 'C');
+-- erro pois ainda não houve o update
 
 UPDATE TAREFAS SET status = 'P' WHERE status = 'A';
+UPDATE TAREFAS SET status = 'E' WHERE status = 'F';
+
+ALTER TABLE TAREFAS ADD CONSTRAINT vldStatus CHECK (status = 'P' OR status = 'E' OR status = 'C');
 

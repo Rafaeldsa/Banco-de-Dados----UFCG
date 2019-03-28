@@ -37,3 +37,34 @@ INSERT INTO TAREFAS VALUES (2147483652, 'limpar portas do 2o andar', '3232323291
 --Questão 4
 DELETE FROM TAREFAS WHERE id is null;
 
+ALTER TABLE TAREFAS RENAME COLUMN tarefa TO descricao;
+ALTER TABLE TAREFAS RENAME COLUMN cpf TO func_resp_cpf;
+ALTER TABLE TAREFAS RENAME COLUMN vaifazer TO prioridade;
+ALTER TABLE TAREFAS RENAME COLUMN sexo TO status;
+
+ALTER TABLE TAREFAS ALTER COLUMN id SET NOT NULL;
+ALTER TABLE TAREFAS ALTER COLUMN descricao SET NOT NULL;
+ALTER TABLE TAREFAS ALTER COLUMN func_resp_cpf SET NOT NULL;
+ALTER TABLE TAREFAS ALTER COLUMN prioridade SET NOT NULL;
+ALTER TABLE TAREFAS ALTER COLUMN status SET NOT NULL;
+
+--Questão 5
+ALTER TABLE TAREFAS ADD CONSTRAINT pk PRIMARY KEY (func_resp_cpf, id);
+
+INSERT INTO TAREFAS VALUES (2147483653, 'limpar portas do 1o andar', '32323232911',2,'A');
+--INSERT INTO TAREFAS VALUES (2147483653, 'aparar a grama da área frontal', '32323232911',3,'A');
+--não funciona após o insert anterior ter sido executado
+
+--Questão 6
+--a) 
+ALTER TABLE TAREFAS ADD CONSTRAINT validaCPF CHECK (LENGTH(func_resp_cpf) = 11);
+
+--INSERT INTO TAREFAS VALUES (2147483653, 'limpar portas do 1o andar', '323232329115',2,'A');
+--não foi inserido pois o length foi maior do cpf
+
+--b)
+ALTER TABLE TAREFAS ADD CONSTRAINT vldStatus CHECK (status = 'P' OR status = 'E' OR status = 'C');
+-- erro
+
+UPDATE TAREFAS SET status = 'P' WHERE status = 'A';
+

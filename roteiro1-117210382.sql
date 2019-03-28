@@ -14,22 +14,28 @@ CREATE TABLE SEGURADO (
  Splaca CHAR(8)  REFERENCES AUTOMOVEL (placa),
  cpf CHAR(11),
  telefone CHAR(14), --formato: (dd)*****-****
+ Splano VARCHAR(15) REFERENCES SEGURO(plano), 
  PRIMARY KEY(cpf)
 );
 
 CREATE TABLE PERITO (
- nome VARCHAR(20),
- cpf CHAR(11),
- PRIMARY KEY(cpf)
+ nome varchar(20),
+ cpf char(11),
+ primary key(cpf)
 );
 
 CREATE TABLE OFICINA (
- nome VARCHAR(20),
- telefone CHAR(14), --formato: (dd)*****-****
- cnpj CHAR(14),
- servicos VARCHAR(20), --eletrico/mecanico
- PRIMARY KEY(cnpj)
+ nome varchar(20),
+ telefone char(14), --formato: (dd)*****-****
+ cnpj char(14),
+ servicos varchar(20), --eletrico/mecanico
+ primary key(cnpj)
 );
 
 CREATE TABLE SEGURO (
+ id integer primary key,
+ Scpf char(11) REFERENCES SEGURADO (cpf) , -- cpf do segurado
+ plano varchar(15),
+ franquia numeric
+);
  

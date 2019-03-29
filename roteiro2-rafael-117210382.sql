@@ -71,3 +71,41 @@ UPDATE TAREFAS SET status = 'E' WHERE status = 'F';
 
 ALTER TABLE TAREFAS ADD CONSTRAINT vldStatus CHECK (status = 'P' OR status = 'E' OR status = 'C');
 
+--Questão 7
+UPDATE TAREFAS SET prioridade = 5 WHERE prioridade = 32767;
+UPDATE TAREFAS SET prioridade = 5 WHERE prioridade = 32766;
+
+ALTER TABLE TAREFAS ADD CONSTRAINT valorPrioridade CHECK (prioridade >= 0 AND prioridade <= 5;
+
+--Questão 8
+CREATE TABLE FUNCIONARIO (
+ cpf CHAR(11) PRIMARY KEY,
+ data_nasc DATE NOT NULL,
+ nome VARCHAR(30) NOT NULL,
+ funcao VARCHAR(11) NOT NULL,
+ nivel CHAR(1),
+ superior_cpf CHAR(11) REFERENCES FUNCIONARIO (cpf)
+);
+
+ALTER TABLE FUNCIONARIO ADD CONSTRAINT checkFuncao CHECK (funcao = 'LIMPEZA' OR funcao = 'SUP_LIMPEZA');
+
+ALTER TABLE FUNCIONARIO ALTER COLUMN nivel SET NOT NULL;
+
+ALTER TABLE FUNCIONARIO ADD CONSTRAINT checkNivel CHECK (nivel = 'J' OR nivel = 'P' OR nivel = 'S');
+
+ALTER TABLE FUNCIONARIO ADD CONSTRAINT checkSuperior CHECK (funcao = 'LIMPEZA' AND superior_cpf IS NOT NULL OR (funcao = 'SUP_LIMPEZA' and superior_cpf is null));
+
+INSERT INTO funcionario(cpf,data_nasc,nome,funcao,nivel,superior_cpf) VALUES ('12345678911', '1982-05-07','Pedro da Silva', 'SUP_LIMPEZA', 'S', null);
+
+INSERT INTO funcionario(cpf,data_nasc,nome,funcao,nivel,superior_cpf) VALUES ('12345678912', '1980-03-08','Jose da Silva', 'LIMPEZA', 'J', '12345678911');
+
+--INSERT INTO funcionario(cpf,data_nasc,nome,funcao,nivel,superior_cpf) VALUES ('12345678913', '1980-04-09','joao da Silva', 'LIMPEZA', 'J', null);
+--não deve funcionar
+
+INSERT INTO funcionario(cpf,data_nasc,nome,funcao,nivel,superior_cpf) VALUES ('12345678913', '1972-04-15','Alvaro Dantas', 'SUP_LIMPEZA', 'P', null);
+INSERT INTO funcionario(cpf,data_nasc,nome,funcao,nivel,superior_cpf) VALUES ('12345678914', '1972-03-25','Gabriel Dantas', 'LIMPEZA', 'J', '12345678913');
+INSERT INTO funcionario(cpf,data_nasc,nome,funcao,nivel,superior_cpf) VALUES ('12345678915', '1972-03-27','Marilane Azevedo', 'SUP_LIMPEZA', 'S', null);
+INSERT INTO funcionario(cpf,data_nasc,nome,funcao,nivel,superior_cpf) VALUES ('12345678916', '1972-01-08','Rafaela Dantas', 'LIMPEZA', 'P', '12345678915');
+
+
+

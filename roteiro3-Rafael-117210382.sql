@@ -38,6 +38,17 @@ CREATE  TABLE ENDERECOS_CLIENTE (
  tipo endereco
 );
 
+CREATE TYPE venda AS ENUM('venda exclusiva com  receita');
+
+CREATE TABLE MEDICAMENTO (
+ id INTEGER PRIMARY KEY,
+ nome TEXT,
+ caracteristica venda 
+);
+
+CREATE TABLE ENTREGAS(
+ codigo INTEGER PRIMARY KEY,
+);
 
 
 

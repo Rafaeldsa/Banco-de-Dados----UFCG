@@ -73,12 +73,11 @@ ALTER TABLE FUNCIONARIO DROP COLUMN id_venda;
 ALTER TABLE FARMACIA ADD CONSTRAINT tipo_excl EXCLUDE USING gist (
 	tipo WITH =) WHERE (tipo = 'sede');
 
+ALTER TABLE FARMACIA ADD COLUMN gerente_func TEXT;
+ALTER TABLE FARMACIA ADD CONSTRAINT check_gerente_func CHECK (gerente_func = 'farmaceutico' OR gerente_func = 'administrador');
 
-
-
-
-
-
+ALTER TABLE VENDAS ADD COLUMN vendedor_func funcao;
+ALTER TABLE VENDAS ADD CONSTRAINT check_vend_fun CHECK (vendedor_func = 'vendedor');
 
 
 

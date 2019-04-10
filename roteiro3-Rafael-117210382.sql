@@ -48,16 +48,30 @@ CREATE TABLE MEDICAMENTO (
 
 CREATE TABLE ENTREGAS(
  codigo INTEGER PRIMARY KEY,
+ cliente_cpf CHAR(11) REFERENCES CLIENTE (cpf),
+ cliente_endereco endereco NOT NULL 
 );
 
+ALTER TABLE ENTREGAS ADD CONSTRAINT cliente_ender CHECK (cliente_endereco = 'residencia' OR cliente_endereco = 'trabalho' OR cliente_endereco = 'outro');
+
+CREATE TABLE VENDAS (
+ codigo INTEGER PRIMARY KEY,
+ clien_cpf CHAR(11) REFERENCES CLIENTE (cpf),
+ func_cpf CHAR(11) REFERENCES FUNCIONARIO (cpf)
+);
+
+ALTER TABLE FARMACIA ADD CONSTRAINT unique_bairro UNIQUE (bairro);
+ALTER TABLE FUNCIONARIO ADD COLUMN id_venda INTEGER;
+ALTER TABLE MEDICAMENTO ADD COLUMN id_venda INTEGER;
+
+ALTER TABLE FUNCIONARIO ADD CONSTRAINT fgk_id_vendas FOREIGN KEY (id_venda) REFERENCES VENDAS (codigo);
+ALTER TABLE MEDICAMENTO ADD CONSTRAINT fgk_id_venda FOREIGN KEY (id_venda) REFERENCES VENDAS (codigo);
+
+ALTER TABLE FUNCIONARIO DROP COLUMN id_venda;
 
 
-
-
-
-
-
-
+ALTER TABLE FARMACIA ADD CONSTRAINT tipo_excl EXCLUDE USING gist (
+	tipo WITH =) WHERE (tipo = 'sede');
 
 
 

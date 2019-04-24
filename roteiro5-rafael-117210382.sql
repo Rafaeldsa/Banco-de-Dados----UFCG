@@ -3,4 +3,27 @@ SELECT COUNT (*) FROM employee WHERE sex = 'F';
 --Q2
 SELECT  FROM employee WHERE sex = 'M' AND address LIKE '%TX';
 --Q3
-SELECT s.ssn AS ssn_supervisior, COUNT(e.superssn) AS qtd_supervisionados FROM employee AS e, employee AS s WHERE e.superssn = s.ssn GROUP BY s.ssn, e.superssn ORDER BY COUNT(e.superssn) ASC, s.ssn ASC; 
+SELECT m.ssn AS ssn_supervisor, COUNT(*) AS qtd_supervisionados 
+FROM (employee AS m RIGHT OUTER JOIN employee AS e ON (m.ssn = e.superssn))
+GROUP BY m.ssn
+ORDER BY COUNT(*) ASC;
+--Q4
+SELECT s.fname AS nome_supervisor, COUNT(*) AS qtd_supervisionados
+FROM (employee AS s JOIN employee AS e ON (s.ssn = e.superssn))
+GROUP BY s.ssn
+ORDER BY COUNT (*) ASC;
+--Q5
+SELECT s.fname AS nome_supervisor, COUNT(*) AS qtd_supervisionados
+FROM (employee AS s RIGHT OUTER JOIN employee AS e ON (s.ssn = e.superssn))
+GROUP BY s.ssn
+ORDER BY COUNT (*) ASC;
+--Q6
+SELECT DISTINCT COUNT(pno) AS qtd from works_on as w, project as m
+WHERE w.pno = m.pnumber
+GROUP BY m.pname
+;
+--Q7
+SELECT m.pnumber, COUNT(pno) AS qtd_func from works_on as w, project as m
+WHERE w.pno = m.pnumber
+GROUP BY m.pnumber
+ORDER BY COUNT(pno) ASC, m.pnumber ASC;

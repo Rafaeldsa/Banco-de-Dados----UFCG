@@ -1,5 +1,7 @@
 /*
     Roteiro 05
+    
+    Fino do fino @EuclidesRamos
 */
 
 -- Question01

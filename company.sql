@@ -63,3 +63,4 @@ CREATE TABLE IF NOT EXISTS  works_on (
   FOREIGN KEY (essn) REFERENCES employee(ssn),
   FOREIGN KEY (pno) REFERENCES project(pnumber)
 );
+#aceita o comentario, Erick_Brth

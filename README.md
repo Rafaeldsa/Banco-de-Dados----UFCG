@@ -1,1 +1,1 @@
-# Welcome to the database repository!gg
+# Welcome to the database repository!
